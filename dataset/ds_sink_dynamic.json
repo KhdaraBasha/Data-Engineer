@@ -29,7 +29,7 @@
 				"fileSystem": "bronze"
 			},
 			"columnDelimiter": ",",
-			"compressionCodec": "snappy",
+			"compressionCodec": null,
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
