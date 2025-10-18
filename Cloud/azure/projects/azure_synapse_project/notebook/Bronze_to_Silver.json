@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "8f96e5a9-701a-4349-9180-91942329a5ca"
+				"spark.autotune.trackingId": "5a82b37c-c278-4e3c-a74a-8787e364d477"
 			}
 		},
 		"metadata": {
@@ -165,9 +165,9 @@
 				"source": [
 					"df_silver.write.format(\"parquet\")\\\n",
 					"        .mode(\"overwrite\")\\\n",
-					"        .save(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/silver/sil_retail_transactions.parquet\")"
+					"        .save(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/silver/\")"
 				],
-				"execution_count": 55
+				"execution_count": 56
 			},
 			{
 				"cell_type": "markdown",
