@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "aab4dd72-8f51-4304-81a0-8a8b027ae4b4"
+				"spark.autotune.trackingId": "0274458b-19f2-4d89-8d95-f998a6390f67"
 			}
 		},
 		"metadata": {
@@ -83,7 +83,7 @@
 					"from pyspark.sql.types import *\n",
 					"from pyspark.sql.group import *"
 				],
-				"execution_count": 13
+				"execution_count": 25
 			},
 			{
 				"cell_type": "markdown",
@@ -102,16 +102,18 @@
 			{
 				"cell_type": "code",
 				"source": [
-					"spark.read.parquet('')"
+					"# spark.read.parquet(\"abfss://clean@pocazuresynapsestorage.blob.core.windows.net/retail/bronze/\")"
 				],
-				"execution_count": null
+				"execution_count": 26
 			},
 			{
 				"cell_type": "code",
 				"source": [
-					"https://pocazuresynapsestorage.blob.core.windows.net/retail/bronze/retail_transactions.parquet"
+					"# https://pocazuresynapsestorage.blob.core.windows.net/retail/bronze/retail_transactions.parquet\n",
+					"\n",
+					"# https://pocazuresynapsestorage.blob.core.windows.net/retail/bronze/retail_transactions.parquet"
 				],
-				"execution_count": null
+				"execution_count": 27
 			},
 			{
 				"cell_type": "markdown",
