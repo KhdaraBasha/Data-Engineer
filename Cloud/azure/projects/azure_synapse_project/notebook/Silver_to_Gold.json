@@ -1,0 +1,281 @@
+{
+	"name": "Silver_to_Gold",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "pocazurespark",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "3e849398-d2cb-4e99-82cb-c40f761ffb3c"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/6bbdd632-f1d6-4c0c-8b40-49cb5f250742/resourceGroups/poc_azure_projects/providers/Microsoft.Synapse/workspaces/poc-azure-synapse-projects/bigDataPools/pocazurespark",
+				"name": "pocazurespark",
+				"type": "Spark",
+				"endpoint": "https://poc-azure-synapse-projects.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/pocazurespark",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.5",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### <mark><u>**Gold Layer Pipeline**</u></mark>"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#### Import Required Modules"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"from pyspark.sql.functions import *\n",
+					"from pyspark.sql.types import *\n",
+					"from notebookutils import mssparkutils"
+				],
+				"execution_count": 59
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#### Check Source File Exist or Not"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"mssparkutils.fs.ls(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/silver/\")"
+				],
+				"execution_count": 60
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#### Read Data from Silver DataLake"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df_gold = spark.read.parquet(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/silver/\")"
+				],
+				"execution_count": 98
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#### Adding Weekday column to The DataFrame"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df_gold = df_gold.withColumn(\"event_day\",\\\n",
+					"    when(dayofweek(col(\"event_date\")) == 1 , \"sun\")\\\n",
+					"    .when(dayofweek(col(\"event_date\")) == 2 , \"Mon\")\\\n",
+					"    .when(dayofweek(col(\"event_date\")) == 3, \"Tue\")\\\n",
+					"    .when(dayofweek(col(\"event_date\")) == 4, \"Wed\")\\\n",
+					"    .when(dayofweek(col(\"event_date\")) == 5, \"Thu\")\\\n",
+					"    .when(dayofweek(col(\"event_date\")) == 6, \"Fir\")\\\n",
+					"    .when(dayofweek(col(\"event_date\")) == 7, \"Sat\")\\\n",
+					"    )"
+				],
+				"execution_count": 99
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#### Daily Transaction Amount"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"daily_revenue = df_gold.groupBy(\"event_date\") \\\n",
+					"    .agg(\n",
+					"        round(sum(\"amount\"),2).alias(\"daily_revenue\"),\n",
+					"        count(\"*\").alias(\"total_purchases\")\n",
+					"    ) \\\n",
+					"    .orderBy(col(\"event_date\").cast(\"string\").desc()) \n",
+					"    # .show()"
+				],
+				"execution_count": 111
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"daily_revenue.write\\\n",
+					"    .mode(\"overwrite\")\\\n",
+					"    .parquet(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/gold/daily_revenue/\")"
+				],
+				"execution_count": 113
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#### Week Day wise Revenue"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"week_day_revenue = df_gold.groupBy(\"event_day\")\\\n",
+					"    .agg(round(sum(\"amount\"),2).alias(\"tot_revenue\"), count(\"*\").alias(\"tot_transactions\"))\\\n",
+					"    .orderBy(col(\"tot_revenue\").desc())\n",
+					"    # .show()"
+				],
+				"execution_count": 114
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"week_day_revenue.write\\\n",
+					"    .mode(\"overwrite\")\\\n",
+					"    .parquet(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/gold/week_day_revenue/\")"
+				],
+				"execution_count": 115
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#### Product Category wise Revenue"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"prod_cat_revenue = df_gold.groupBy(\"product_category\")\\\n",
+					"     .agg(round(sum(\"amount\"),2).alias(\"tot_revenue\"), count(\"*\").alias(\"tot_transactions\"))\\\n",
+					"    .orderBy(col(\"tot_revenue\").desc())\n",
+					"    # .show()"
+				],
+				"execution_count": 120
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"prod_cat_revenue.write\\\n",
+					"    .mode(\"overwrite\")\\\n",
+					"    .parquet(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/gold/prod_cat_revenue/\")"
+				],
+				"execution_count": 121
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#### "
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					""
+				]
+			}
+		]
+	}
+}
