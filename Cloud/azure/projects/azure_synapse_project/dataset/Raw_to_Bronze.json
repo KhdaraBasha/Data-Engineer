@@ -1,0 +1,19 @@
+{
+	"name": "Raw_to_Bronze",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azure_synapse_ddl_sto_connection_link",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "bronze"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
