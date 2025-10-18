@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "0274458b-19f2-4d89-8d95-f998a6390f67"
+				"spark.autotune.trackingId": "8f96e5a9-701a-4349-9180-91942329a5ca"
 			}
 		},
 		"metadata": {
@@ -81,9 +81,32 @@
 				"source": [
 					"from pyspark.sql.functions import *\n",
 					"from pyspark.sql.types import *\n",
-					"from pyspark.sql.group import *"
+					"from pyspark.sql.group import *\n",
+					"from notebookutils import mssparkutils\n",
+					""
 				],
-				"execution_count": 25
+				"execution_count": 39
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"%md\n",
+					"#### Check Source File Exist or Not"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"mssparkutils.fs.ls(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/bronze/retail_transactions.parquet\")"
+				],
+				"execution_count": 41
 			},
 			{
 				"cell_type": "markdown",
@@ -101,19 +124,50 @@
 			},
 			{
 				"cell_type": "code",
+				"metadata": {
+					"collapsed": false
+				},
 				"source": [
-					"# spark.read.parquet(\"abfss://clean@pocazuresynapsestorage.blob.core.windows.net/retail/bronze/\")"
+					"df_bronze = spark.read.parquet(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/bronze/\")\n",
+					"\n",
+					"df_silver = \\\n",
+					"(\\\n",
+					"    df_bronze\\\n",
+					"    .filter(col(\"event_type\") == \"purchase\")\\\n",
+					"    .dropna(subset=[\"customer_id\", \"amount\"])\\\n",
+					"    .withColumn(\"event_date\", to_date(col(\"event_timestamp\")))\\\n",
+					"    .withColumn(\"payment_method\", lower(col(\"payment_method\")))\\\n",
+					"    .withColumn(\"amount\", col(\"amount\").cast(\"float\"))\\\n",
+					"    # .select(\\\n",
+					"    #     \"event_id\", \"customer_id\", \"event_date\", \"product_id\",\\\n",
+					"    #     \"product_category\", \"payment_methid\", \"amount\", \"location\", \"status\"\\\n",
+					"    # )\\\n",
+					")"
 				],
-				"execution_count": 26
+				"execution_count": 53
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"%md\n",
+					"#### Write DataFrame Silver to Silver Storage Layer"
+				]
 			},
 			{
 				"cell_type": "code",
 				"source": [
-					"# https://pocazuresynapsestorage.blob.core.windows.net/retail/bronze/retail_transactions.parquet\n",
-					"\n",
-					"# https://pocazuresynapsestorage.blob.core.windows.net/retail/bronze/retail_transactions.parquet"
+					"df_silver.write.format(\"parquet\")\\\n",
+					"        .mode(\"overwrite\")\\\n",
+					"        .save(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/silver/sil_retail_transactions.parquet\")"
 				],
-				"execution_count": 27
+				"execution_count": 55
 			},
 			{
 				"cell_type": "markdown",
