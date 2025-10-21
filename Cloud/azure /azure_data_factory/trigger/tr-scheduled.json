@@ -1,0 +1,25 @@
+{
+	"name": "tr-scheduled",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "trigger-scheduled",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 2,
+				"startTime": "2025-10-21T20:51:00",
+				"endTime": "2025-10-22T02:30:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
