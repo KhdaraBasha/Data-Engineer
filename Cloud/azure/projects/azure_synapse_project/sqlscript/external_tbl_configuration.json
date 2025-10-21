@@ -1,0 +1,17 @@
+{
+	"name": "external_tbl_configuration",
+	"properties": {
+		"content": {
+			"query": "\n-- ## Connect to The DataBase\nUSE poc_retail_db;\n\n-- ## Create a New Schema\nIF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'poc')\nBEGIN\n    EXEC('CREATE SCHEMA poc');\nEND\n\n-- ## Create External Data Sources\nCREATE EXTERNAL DATA SOURCE adl_retail_datasource\nWITH    (\n    LOCATION = 'https://pocazuresynapsestorage.blob.core.windows.net/retail'\n    )\n;\n\n-- ## Create External FILE FORMAT\nCREATE EXTERNAL FILE FORMAT ParquetFormat\nWITH    (\n    FORMAT_TYPE = PARQUET\n    )\n;\n ",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "poc_retail_db",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
