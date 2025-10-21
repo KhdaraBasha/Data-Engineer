@@ -30,6 +30,18 @@
 		"azure_sql_connection_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "skbasha"
+		},
+		"tr-storage-event_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/6bbdd632-f1d6-4c0c-8b40-49cb5f250742/resourceGroups/poc_adf_learn/providers/Microsoft.Storage/storageAccounts/pocdata2025"
+		},
+		"tr-storage_event_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/6bbdd632-f1d6-4c0c-8b40-49cb5f250742/resourceGroups/poc_adf_learn/providers/Microsoft.Storage/storageAccounts/pocdata2025"
+		},
+		"TR_Storage_Event_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/6bbdd632-f1d6-4c0c-8b40-49cb5f250742/resourceGroups/poc_adf_learn/providers/Microsoft.Storage/storageAccounts/pocdata2025"
 		}
 	},
 	"variables": {
@@ -813,6 +825,186 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/trigger-storage-event')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Scheduled Trigger",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "input//emp_1.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.employee"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"additionalColumns": [
+									{
+										"name": "load_date",
+										"value": {
+											"value": "@formatDateTime(utcNow(),'yyyy-MM-dd hh:mm:ss')",
+											"type": "Expression"
+										}
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "emp_id",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "emp_id",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "salary",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "salary",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "address",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "address",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "loc",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "location",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "email",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "email",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "load_date",
+											"type": "String"
+										},
+										"sink": {
+											"name": "load_date",
+											"type": "String",
+											"physicalType": "text"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "output_data",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"now": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
+				"[concat(variables('factoryId'), '/datasets/output_data')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/tr-scheduled')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -831,15 +1023,106 @@
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
-						"frequency": "Minute",
-						"interval": 2,
+						"frequency": "Month",
+						"interval": 10,
 						"startTime": "2025-10-22T02:35:00",
-						"timeZone": "India Standard Time"
+						"timeZone": "India Standard Time",
+						"schedule": {}
 					}
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/trigger-scheduled')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tr-storage-event')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "copy_activity_blob_to_blob",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/input/blobs/emp_1.csv",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('tr-storage-event_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/copy_activity_blob_to_blob')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tr-storage_event')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "copy_activity_blob_to_blob",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/input/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('tr-storage_event_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/copy_activity_blob_to_blob')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TR_Storage_Event')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "trigger-storage-event",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/input/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('TR_Storage_Event_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/trigger-storage-event')]"
 			]
 		}
 	]

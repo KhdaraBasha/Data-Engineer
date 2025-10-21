@@ -23,6 +23,15 @@
 		"azure_sql_connection_properties_typeProperties_userName": {
 			"value": "skbasha"
 		},
+		"tr-storage-event_properties_typeProperties_scope": {
+			"value": "/subscriptions/6bbdd632-f1d6-4c0c-8b40-49cb5f250742/resourceGroups/poc_adf_learn/providers/Microsoft.Storage/storageAccounts/pocdata2025"
+		},
+		"tr-storage_event_properties_typeProperties_scope": {
+			"value": "/subscriptions/6bbdd632-f1d6-4c0c-8b40-49cb5f250742/resourceGroups/poc_adf_learn/providers/Microsoft.Storage/storageAccounts/pocdata2025"
+		},
+		"TR_Storage_Event_properties_typeProperties_scope": {
+			"value": "/subscriptions/6bbdd632-f1d6-4c0c-8b40-49cb5f250742/resourceGroups/poc_adf_learn/providers/Microsoft.Storage/storageAccounts/pocdata2025"
+		},
 		"containerUri": {
 			"value": ""
 		},
