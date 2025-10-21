@@ -11,9 +11,25 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'azure_ddl_storage'"
 		},
+		"azure_sql_connection_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'azure_sql_connection'"
+		},
 		"azure_ddl_storage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://pocdata2025.dfs.core.windows.net/"
+		},
+		"azure_sql_connection_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "spotifyazureprojectserver.database.windows.net"
+		},
+		"azure_sql_connection_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "spotify_db"
+		},
+		"azure_sql_connection_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "skbasha"
 		},
 		"containerUri": {
 			"type": "string",
@@ -45,8 +61,20 @@
 					"azure_ddl_storage_accountKey": {
 						"value": "[parameters('azure_ddl_storage_accountKey')]"
 					},
+					"azure_sql_connection_password": {
+						"value": "[parameters('azure_sql_connection_password')]"
+					},
 					"azure_ddl_storage_properties_typeProperties_url": {
 						"value": "[parameters('azure_ddl_storage_properties_typeProperties_url')]"
+					},
+					"azure_sql_connection_properties_typeProperties_server": {
+						"value": "[parameters('azure_sql_connection_properties_typeProperties_server')]"
+					},
+					"azure_sql_connection_properties_typeProperties_database": {
+						"value": "[parameters('azure_sql_connection_properties_typeProperties_database')]"
+					},
+					"azure_sql_connection_properties_typeProperties_userName": {
+						"value": "[parameters('azure_sql_connection_properties_typeProperties_userName')]"
 					}
 				}
 			},

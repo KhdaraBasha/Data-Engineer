@@ -8,8 +8,20 @@
 		"azure_ddl_storage_accountKey": {
 			"value": ""
 		},
+		"azure_sql_connection_password": {
+			"value": ""
+		},
 		"azure_ddl_storage_properties_typeProperties_url": {
 			"value": "https://pocdata2025.dfs.core.windows.net/"
+		},
+		"azure_sql_connection_properties_typeProperties_server": {
+			"value": "spotifyazureprojectserver.database.windows.net"
+		},
+		"azure_sql_connection_properties_typeProperties_database": {
+			"value": "spotify_db"
+		},
+		"azure_sql_connection_properties_typeProperties_userName": {
+			"value": "skbasha"
 		}
 	}
 }
