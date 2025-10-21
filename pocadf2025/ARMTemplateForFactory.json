@@ -317,14 +317,7 @@
 					{
 						"name": "Scheduled Trigger",
 						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Set variable1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -478,25 +471,6 @@
 								"parameters": {}
 							}
 						]
-					},
-					{
-						"name": "Set variable1",
-						"type": "SetVariable",
-						"state": "Inactive",
-						"onInactiveMarkAs": "Succeeded",
-						"dependsOn": [],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "now",
-							"value": {
-								"value": "@formatDateTime(utcNow(),'yyyy-MM-dd hh:mm:ss')",
-								"type": "Expression"
-							}
-						}
 					}
 				],
 				"policy": {
@@ -859,7 +833,7 @@
 					"recurrence": {
 						"frequency": "Minute",
 						"interval": 2,
-						"startTime": "2025-10-22T02:33:00",
+						"startTime": "2025-10-22T02:35:00",
 						"timeZone": "India Standard Time"
 					}
 				}
