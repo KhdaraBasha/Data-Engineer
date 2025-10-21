@@ -9,6 +9,12 @@
 					"referenceName": "trigger-storage-event",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "copy_activity_blob_to_blob",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "BlobEventsTrigger",
