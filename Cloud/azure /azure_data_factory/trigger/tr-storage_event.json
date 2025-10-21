@@ -19,7 +19,7 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/input/blobs/emp_1.csv",
+			"blobPathBeginsWith": "/input/blobs/",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/6bbdd632-f1d6-4c0c-8b40-49cb5f250742/resourceGroups/poc_adf_learn/providers/Microsoft.Storage/storageAccounts/pocdata2025",
 			"events": [
