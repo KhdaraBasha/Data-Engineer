@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "copy_activity_with_parameterization",
 	"properties": {
 		"activities": [
 			{
@@ -39,6 +39,10 @@
 							"table": {
 								"value": "@pipeline().parameters.table_name",
 								"type": "Expression"
+							},
+							"schema": {
+								"value": "@pipeline().parameters.schema_name",
+								"type": "Expression"
 							}
 						}
 					}
@@ -59,6 +63,9 @@
 		],
 		"parameters": {
 			"table_name": {
+				"type": "string"
+			},
+			"schema_name": {
 				"type": "string"
 			}
 		},
