@@ -67,8 +67,8 @@
 								},
 								"sink": {
 									"name": "Order_Date",
-									"type": "Date",
-									"physicalType": "date"
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							},
 							{
@@ -79,8 +79,8 @@
 								},
 								"sink": {
 									"name": "Ship_Date",
-									"type": "Date",
-									"physicalType": "date"
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							},
 							{
