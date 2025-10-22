@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Union_of_Sales_Data",
+				"name": "DF_Sales_Data_Merge",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -15,6 +15,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DF_Sales_Data_Merge",
+						"type": "DataFlowReference"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
