@@ -1,0 +1,37 @@
+{
+	"name": "azuredb_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azure_sql_connection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "product_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "product_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sales_price",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "salestime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "customer_sales"
+		}
+	}
+}
