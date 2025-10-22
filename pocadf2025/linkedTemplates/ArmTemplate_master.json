@@ -7,6 +7,14 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "pocadf2025"
 		},
+		"azure_ddl_input_source_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'azure_ddl_input_source'"
+		},
+		"azure_ddl_output_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'azure_ddl_output'"
+		},
 		"azure_ddl_storage_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'azure_ddl_storage'"
@@ -14,6 +22,14 @@
 		"azure_sql_connection_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'azure_sql_connection'"
+		},
+		"azure_ddl_input_source_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://pocdata2025.dfs.core.windows.net/"
+		},
+		"azure_ddl_output_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://pocdata2025.dfs.core.windows.net/"
 		},
 		"azure_ddl_storage_properties_typeProperties_url": {
 			"type": "string",
@@ -43,6 +59,14 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/6bbdd632-f1d6-4c0c-8b40-49cb5f250742/resourceGroups/poc_adf_learn/providers/Microsoft.Storage/storageAccounts/pocdata2025"
 		},
+		"tw_trigger_properties_pipeline_parameters_p_sta_dt": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowstarttime"
+		},
+		"tw_trigger_properties_pipeline_parameters_p_end_dt": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndtime"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -70,11 +94,23 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"azure_ddl_input_source_accountKey": {
+						"value": "[parameters('azure_ddl_input_source_accountKey')]"
+					},
+					"azure_ddl_output_accountKey": {
+						"value": "[parameters('azure_ddl_output_accountKey')]"
+					},
 					"azure_ddl_storage_accountKey": {
 						"value": "[parameters('azure_ddl_storage_accountKey')]"
 					},
 					"azure_sql_connection_password": {
 						"value": "[parameters('azure_sql_connection_password')]"
+					},
+					"azure_ddl_input_source_properties_typeProperties_url": {
+						"value": "[parameters('azure_ddl_input_source_properties_typeProperties_url')]"
+					},
+					"azure_ddl_output_properties_typeProperties_url": {
+						"value": "[parameters('azure_ddl_output_properties_typeProperties_url')]"
 					},
 					"azure_ddl_storage_properties_typeProperties_url": {
 						"value": "[parameters('azure_ddl_storage_properties_typeProperties_url')]"
@@ -87,6 +123,24 @@
 					},
 					"azure_sql_connection_properties_typeProperties_userName": {
 						"value": "[parameters('azure_sql_connection_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "pocadf2025_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"TR_Storage_Event_properties_typeProperties_scope": {
 						"value": "[parameters('TR_Storage_Event_properties_typeProperties_scope')]"
@@ -96,10 +150,18 @@
 					},
 					"tr-storage_event_properties_typeProperties_scope": {
 						"value": "[parameters('tr-storage_event_properties_typeProperties_scope')]"
+					},
+					"tw_trigger_properties_pipeline_parameters_p_sta_dt": {
+						"value": "[parameters('tw_trigger_properties_pipeline_parameters_p_sta_dt')]"
+					},
+					"tw_trigger_properties_pipeline_parameters_p_end_dt": {
+						"value": "[parameters('tw_trigger_properties_pipeline_parameters_p_end_dt')]"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'pocadf2025_ArmTemplate_0')]"
+			]
 		}
 	]
 }

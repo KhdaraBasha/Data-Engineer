@@ -5,11 +5,23 @@
 		"factoryName": {
 			"value": "pocadf2025"
 		},
+		"azure_ddl_input_source_accountKey": {
+			"value": ""
+		},
+		"azure_ddl_output_accountKey": {
+			"value": ""
+		},
 		"azure_ddl_storage_accountKey": {
 			"value": ""
 		},
 		"azure_sql_connection_password": {
 			"value": ""
+		},
+		"azure_ddl_input_source_properties_typeProperties_url": {
+			"value": "https://pocdata2025.dfs.core.windows.net/"
+		},
+		"azure_ddl_output_properties_typeProperties_url": {
+			"value": "https://pocdata2025.dfs.core.windows.net/"
 		},
 		"azure_ddl_storage_properties_typeProperties_url": {
 			"value": "https://pocdata2025.dfs.core.windows.net/"
@@ -31,6 +43,12 @@
 		},
 		"tr-storage_event_properties_typeProperties_scope": {
 			"value": "/subscriptions/6bbdd632-f1d6-4c0c-8b40-49cb5f250742/resourceGroups/poc_adf_learn/providers/Microsoft.Storage/storageAccounts/pocdata2025"
+		},
+		"tw_trigger_properties_pipeline_parameters_p_sta_dt": {
+			"value": "@trigger().outputs.windowstarttime"
+		},
+		"tw_trigger_properties_pipeline_parameters_p_end_dt": {
+			"value": "@trigger().outputs.windowEndtime"
 		}
 	}
 }
