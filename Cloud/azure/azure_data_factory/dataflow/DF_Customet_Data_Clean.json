@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "DF_Customet_Data_Clean",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -9,11 +9,26 @@
 						"referenceName": "df_azure_sqldb_connect",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "CustomerData"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DF_Output_Data",
+						"type": "DatasetReference"
+					},
+					"name": "DDLCSV"
+				}
+			],
+			"transformations": [
+				{
+					"name": "TitleFilter"
+				},
+				{
+					"name": "DataSort"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          CustomerID as integer,",
@@ -35,7 +50,16 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source1"
+				"     format: 'table') ~> CustomerData",
+				"CustomerData filter(Title == 'Mr.' || Title == 'Ms.') ~> TitleFilter",
+				"TitleFilter sort(asc(FirstName, true)) ~> DataSort",
+				"DataSort sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DDLCSV"
 			]
 		}
 	}
