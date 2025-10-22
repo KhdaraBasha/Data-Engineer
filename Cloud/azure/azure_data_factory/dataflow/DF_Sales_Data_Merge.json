@@ -1,0 +1,66 @@
+{
+	"name": "DF_Sales_Data_Merge",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "df_mum_data",
+						"type": "DatasetReference"
+					},
+					"name": "MumData"
+				},
+				{
+					"dataset": {
+						"referenceName": "df_del_data",
+						"type": "DatasetReference"
+					},
+					"name": "DelData"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText2",
+						"type": "DatasetReference"
+					},
+					"name": "MumDelOutput"
+				}
+			],
+			"transformations": [
+				{
+					"name": "UnionMumDelData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {month } as string,",
+				"          sales as string,",
+				"          profit as string,",
+				"          location as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> MumData",
+				"source(output(",
+				"          {month } as string,",
+				"          sales as string,",
+				"          profit as string,",
+				"          location as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> DelData",
+				"MumData, DelData union(byName: true)~> UnionMumDelData",
+				"UnionMumDelData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> MumDelOutput"
+			]
+		}
+	}
+}

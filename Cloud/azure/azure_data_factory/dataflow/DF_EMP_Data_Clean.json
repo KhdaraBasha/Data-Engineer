@@ -1,0 +1,67 @@
+{
+	"name": "DF_EMP_Data_Clean",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText4",
+						"type": "DatasetReference"
+					},
+					"name": "EmpDataInput"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Json1",
+						"type": "DatasetReference"
+					},
+					"name": "EmpDataOutput"
+				}
+			],
+			"transformations": [
+				{
+					"name": "EmpDataClean"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp_id as string,",
+				"          name as string,",
+				"          salary as double,",
+				"          address as string,",
+				"          loc as string,",
+				"          email as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> EmpDataInput",
+				"EmpDataInput derive(salary = coalesce(salary,10000),",
+				"          name = coalesce(name,'unknown'),",
+				"          country = upper(address)) ~> EmpDataClean",
+				"EmpDataClean select(mapColumn(",
+				"          emp_id,",
+				"          emp_name = name,",
+				"          emp_email = email,",
+				"          emp_country = country,",
+				"          emp_loc = loc,",
+				"          emp_salary = salary",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> EmpDataOutput"
+			]
+		}
+	}
+}

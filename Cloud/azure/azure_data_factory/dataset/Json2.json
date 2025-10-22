@@ -1,0 +1,27 @@
+{
+	"name": "Json2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azure_ddl_output",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"file_directroy": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().file_directroy",
+					"type": "Expression"
+				},
+				"fileSystem": "azure-sql-db"
+			}
+		},
+		"schema": {}
+	}
+}

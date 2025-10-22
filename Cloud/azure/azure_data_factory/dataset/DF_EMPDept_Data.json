@@ -1,0 +1,18 @@
+{
+	"name": "DF_EMPDept_Data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azure_ddl_output",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "emp-dept"
+			}
+		},
+		"schema": {}
+	}
+}

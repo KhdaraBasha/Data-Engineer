@@ -1,0 +1,53 @@
+{
+	"name": "DF_Aggregate_Emp_Data",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText5",
+						"type": "DatasetReference"
+					},
+					"name": "InputData"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp_id as string,",
+				"          name as string,",
+				"          salary as double,",
+				"          address as string,",
+				"          loc as string,",
+				"          email as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> InputData",
+				"select1 aggregate(groupBy(emp_country),",
+				"     tot_emp_cnt = count(emp_id),",
+				"          tot_emp_salary = sum(emp_salary),",
+				"          min_salary = min(emp_salary),",
+				"          max_salary = max(emp_salary),",
+				"          avg_salary_per_employee = sum(emp_salary) / count(emp_id)) ~> aggregate1",
+				"InputData select(mapColumn(",
+				"          emp_id,",
+				"          emp_name = name,",
+				"          emp_salary = salary,",
+				"          emp_country = address",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
+			]
+		}
+	}
+}
