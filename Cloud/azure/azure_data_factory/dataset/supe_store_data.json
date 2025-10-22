@@ -1,0 +1,120 @@
+{
+	"name": "supe_store_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azure_ddl_input_source",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "superstore.csv",
+				"fileSystem": "superstore"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ID",
+				"type": "String"
+			},
+			{
+				"name": "Order_id",
+				"type": "String"
+			},
+			{
+				"name": "Order_Date",
+				"type": "String"
+			},
+			{
+				"name": "Ship_Date",
+				"type": "String"
+			},
+			{
+				"name": "Ship_Mode",
+				"type": "String"
+			},
+			{
+				"name": "Customer_id",
+				"type": "String"
+			},
+			{
+				"name": "Customer_Name",
+				"type": "String"
+			},
+			{
+				"name": "Segment",
+				"type": "String"
+			},
+			{
+				"name": "Country",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "State",
+				"type": "String"
+			},
+			{
+				"name": "Postal_Code",
+				"type": "String"
+			},
+			{
+				"name": "Region",
+				"type": "String"
+			},
+			{
+				"name": "Product_ID",
+				"type": "String"
+			},
+			{
+				"name": "Category",
+				"type": "String"
+			},
+			{
+				"name": "Sub_Category",
+				"type": "String"
+			},
+			{
+				"name": "Product_Name",
+				"type": "String"
+			},
+			{
+				"name": "Sales",
+				"type": "String"
+			},
+			{
+				"name": "Quantity",
+				"type": "String"
+			},
+			{
+				"name": "Discount",
+				"type": "String"
+			},
+			{
+				"name": "Profit",
+				"type": "String"
+			},
+			{
+				"name": "user_id",
+				"type": "String"
+			},
+			{
+				"name": "state_id",
+				"type": "String"
+			},
+			{
+				"name": "order_s",
+				"type": "String"
+			}
+		]
+	}
+}
