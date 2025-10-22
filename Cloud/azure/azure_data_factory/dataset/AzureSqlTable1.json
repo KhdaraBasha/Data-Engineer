@@ -8,6 +8,9 @@
 		"parameters": {
 			"table": {
 				"type": "string"
+			},
+			"schema": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -15,7 +18,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": {
-				"value": "saleslt",
+				"value": "@dataset().schema",
 				"type": "Expression"
 			},
 			"table": {
