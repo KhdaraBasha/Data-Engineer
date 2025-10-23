@@ -14,7 +14,7 @@
 				"typeProperties": {
 					"variableName": "string",
 					"value": {
-						"value": "'emp_csv'",
+						"value": "emp_csv",
 						"type": "Expression"
 					}
 				}
