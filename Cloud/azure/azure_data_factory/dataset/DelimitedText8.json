@@ -1,5 +1,5 @@
 {
-	"name": "azure_ddl_data",
+	"name": "DelimitedText8",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "azure_ddl_storage",
@@ -10,15 +10,32 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "pivot_emp_dept.csv",
+				"fileName": "unpiot.csv",
 				"folderPath": "input",
-				"fileSystem": "pivot-data"
+				"fileSystem": "un-pivot-data"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "dept",
+				"type": "String"
+			},
+			{
+				"name": "india",
+				"type": "String"
+			},
+			{
+				"name": "usa",
+				"type": "String"
+			}
+		]
 	}
 }

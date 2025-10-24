@@ -1,18 +1,27 @@
 {
-	"name": "azure_ddl_data",
+	"name": "DelimitedText12",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "azure_ddl_storage",
+			"referenceName": "azure_ddl_output",
 			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"usa_file_name": {
+				"type": "String",
+				"defaultValue": "emp_usa.csv"
+			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "pivot_emp_dept.csv",
-				"folderPath": "input",
-				"fileSystem": "pivot-data"
+				"fileName": {
+					"value": "@dataset().usa_file_name",
+					"type": "Expression"
+				},
+				"folderPath": "usa",
+				"fileSystem": "conditional-split-output"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

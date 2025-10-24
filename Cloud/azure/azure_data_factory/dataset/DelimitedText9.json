@@ -1,8 +1,8 @@
 {
-	"name": "azure_ddl_data",
+	"name": "DelimitedText9",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "azure_ddl_storage",
+			"referenceName": "azure_ddl_output",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,8 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "pivot_emp_dept.csv",
-				"folderPath": "input",
+				"folderPath": "output",
 				"fileSystem": "pivot-data"
 			},
 			"columnDelimiter": ",",
