@@ -1,0 +1,42 @@
+{
+	"name": "unpivot_transformation",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText8",
+						"type": "DatasetReference"
+					},
+					"name": "UnPivotData"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "unpivot1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as string,",
+				"          dept as string,",
+				"          india as integer,",
+				"          usa as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> UnPivotData",
+				"UnPivotData unpivot(output(",
+				"          country as string,",
+				"          emp_count as integer",
+				"     ),",
+				"     ungroupBy(id,",
+				"          dept),",
+				"     lateral: true,",
+				"     ignoreNullPivots: false) ~> unpivot1"
+			]
+		}
+	}
+}
