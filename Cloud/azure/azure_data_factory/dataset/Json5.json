@@ -1,0 +1,19 @@
+{
+	"name": "Json5",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azure_ddl_output",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "dept",
+				"fileSystem": "if-container"
+			}
+		},
+		"schema": {}
+	}
+}

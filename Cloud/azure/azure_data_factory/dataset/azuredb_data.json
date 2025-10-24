@@ -31,7 +31,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "customer_sales"
+			"table": "tb_employee_resign"
 		}
 	}
 }
