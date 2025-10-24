@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": "tumbling-window-data"
+				"folderPath": "output",
+				"fileSystem": "un-pivot-data"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
