@@ -5,12 +5,22 @@
 			"referenceName": "azure_ddl_output",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"file_name": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": "dataflow-output"
+				"fileName": {
+					"value": "@concat(dataset().file_name,'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "emp_1",
+				"fileSystem": "faild-activity"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
