@@ -5,11 +5,6 @@
 			"referenceName": "azure_ddl_output",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"file_name": {
-				"type": "String"
-			}
-		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
