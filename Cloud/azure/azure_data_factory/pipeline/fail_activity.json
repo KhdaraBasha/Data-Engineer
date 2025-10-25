@@ -96,6 +96,28 @@
 									]
 								}
 							]
+						},
+						{
+							"value": "Case3"
+						}
+					],
+					"defaultActivities": [
+						{
+							"name": "Fail1",
+							"description": "File Not Exists",
+							"type": "Fail",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"message": {
+									"value": "@concat(pipeline().parameters.file_name, ' ', 'File not exists')",
+									"type": "Expression"
+								},
+								"errorCode": {
+									"value": "'Error Code is - 10001'",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
