@@ -10,8 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "web_data.json",
-				"folderPath": "web-parsed_data",
+				"folderPath": {
+					"value": "web_parsed_data",
+					"type": "Expression"
+				},
 				"fileSystem": "output"
 			}
 		},
