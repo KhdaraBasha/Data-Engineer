@@ -10,9 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "pivot_emp_dept.csv",
-				"folderPath": "input",
-				"fileSystem": "pivot-data"
+				"fileName": "emp_1.csv",
+				"fileSystem": "get-metadata-files"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
