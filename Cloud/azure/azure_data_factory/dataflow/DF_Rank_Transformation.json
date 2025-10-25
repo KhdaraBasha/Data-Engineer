@@ -29,7 +29,9 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 rank(desc(salary, true),",
-				"     output(rank as long)) ~> rank1"
+				"     caseInsensitive: true,",
+				"     output(rank as long),",
+				"     dense: true) ~> rank1"
 			]
 		}
 	}
