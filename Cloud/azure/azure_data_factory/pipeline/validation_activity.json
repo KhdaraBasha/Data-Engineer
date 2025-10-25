@@ -39,7 +39,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "file1",
+					"variableName": "VAR!",
 					"value": {
 						"value": "@activity('Validation1').output.exists",
 						"type": "Expression"
@@ -63,7 +63,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "File",
+					"variableName": "VAR",
 					"value": {
 						"value": "@activity('Validation1').output.exists",
 						"type": "Expression"
@@ -84,6 +84,15 @@
 				"type": "String"
 			},
 			"file1": {
+				"type": "String"
+			},
+			"File1": {
+				"type": "String"
+			},
+			"VAR!": {
+				"type": "String"
+			},
+			"VAR": {
 				"type": "String"
 			}
 		},
