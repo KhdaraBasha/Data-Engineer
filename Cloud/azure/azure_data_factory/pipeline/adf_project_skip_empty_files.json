@@ -178,13 +178,7 @@
 							"outputs": [
 								{
 									"referenceName": "Json8",
-									"type": "DatasetReference",
-									"parameters": {
-										"file_name": {
-											"value": "@variables('file_name')",
-											"type": "Expression"
-										}
-									}
+									"type": "DatasetReference"
 								}
 							]
 						}
