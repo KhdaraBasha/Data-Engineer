@@ -85,7 +85,13 @@
 									"inputs": [
 										{
 											"referenceName": "azure_ddl_data",
-											"type": "DatasetReference"
+											"type": "DatasetReference",
+											"parameters": {
+												"file_name": {
+													"value": "@pipeline().parameters.file_name",
+													"type": "Expression"
+												}
+											}
 										}
 									]
 								}
