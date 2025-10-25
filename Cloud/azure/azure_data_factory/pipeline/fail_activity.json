@@ -64,13 +64,7 @@
 									"inputs": [
 										{
 											"referenceName": "azure_ddl_data",
-											"type": "DatasetReference",
-											"parameters": {
-												"file_name": {
-													"value": "@pipeline().parameters.file_name",
-													"type": "Expression"
-												}
-											}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
@@ -139,13 +133,7 @@
 									"inputs": [
 										{
 											"referenceName": "azure_ddl_data",
-											"type": "DatasetReference",
-											"parameters": {
-												"file_name": {
-													"value": "@pipeline().parameters.file_name",
-													"type": "Expression"
-												}
-											}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
