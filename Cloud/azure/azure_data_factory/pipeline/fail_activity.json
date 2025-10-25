@@ -8,6 +8,10 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
+					"on": {
+						"value": "@pipeline().parameters.file_name",
+						"type": "Expression"
+					},
 					"cases": [
 						{
 							"value": "emp_1",
@@ -36,7 +40,26 @@
 												"type": "DelimitedTextReadSettings"
 											}
 										},
-										"enableStaging": false
+										"sink": {
+											"type": "DelimitedTextSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".txt"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
 									},
 									"inputs": [
 										{
@@ -48,6 +71,12 @@
 													"type": "Expression"
 												}
 											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "DF_Output_Data",
+											"type": "DatasetReference"
 										}
 									]
 								}
@@ -80,11 +109,42 @@
 												"type": "DelimitedTextReadSettings"
 											}
 										},
-										"enableStaging": false
+										"sink": {
+											"type": "DelimitedTextSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".txt"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
 									},
 									"inputs": [
 										{
 											"referenceName": "azure_ddl_data",
+											"type": "DatasetReference",
+											"parameters": {
+												"file_name": {
+													"value": "@pipeline().parameters.file_name",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "DF_Output_Data",
 											"type": "DatasetReference",
 											"parameters": {
 												"file_name": {
