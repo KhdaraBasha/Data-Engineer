@@ -8,11 +8,85 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"timeout": "0.12:00:00",
+					"dataset": {
+						"referenceName": "azure_ddl_data",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_name": {
+								"value": "@pipeline().parameters.file_name",
+								"type": "Expression"
+							}
+						}
+					},
+					"timeout": "0.00:00:30",
 					"sleep": 10
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Validation1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "file1",
+					"value": {
+						"value": "@activity('Validation1').output.exists",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable1_copy1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Validation1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "File",
+					"value": {
+						"value": "@activity('Validation1').output.exists",
+						"type": "Expression"
+					}
 				}
 			}
 		],
+		"parameters": {
+			"file_name": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"File": {
+				"type": "String"
+			},
+			"file": {
+				"type": "String"
+			},
+			"file1": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
