@@ -19,7 +19,7 @@
 					"value": "@dataset().file_name",
 					"type": "Expression"
 				},
-				"fileSystem": "filter-activity"
+				"fileSystem": "get-metadata-files"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
