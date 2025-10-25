@@ -15,10 +15,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@concat(dataset().file_name,'.csv')",
-					"type": "Expression"
-				},
 				"fileSystem": "get-metadata-files"
 			},
 			"columnDelimiter": ",",
