@@ -1,8 +1,8 @@
 {
-	"name": "DF_Output_Data",
+	"name": "DelimitedText18",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "azure_ddl_output",
+			"referenceName": "azure_ddl_storage",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -16,20 +16,33 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@concat(dataset().file_name,'.csv')",
-					"type": "Expression"
-				},
-				"folderPath": {
 					"value": "@dataset().file_name",
 					"type": "Expression"
 				},
-				"fileSystem": "faild-activity"
+				"fileSystem": "get-metadata-files"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "month ",
+				"type": "String"
+			},
+			{
+				"name": "sales",
+				"type": "String"
+			},
+			{
+				"name": "profit",
+				"type": "String"
+			},
+			{
+				"name": "location",
+				"type": "String"
+			}
+		]
 	}
 }

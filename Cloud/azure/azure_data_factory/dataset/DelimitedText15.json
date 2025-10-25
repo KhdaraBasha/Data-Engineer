@@ -1,31 +1,36 @@
 {
-	"name": "azure_ddl_data",
+	"name": "DelimitedText15",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "azure_ddl_storage",
 			"type": "LinkedServiceReference"
-		},
-		"parameters": {
-			"file_name": {
-				"type": "String"
-			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@dataset().file_name",
-					"type": "Expression"
-				},
-				"fileSystem": "get-metadata-files"
+				"fileName": "department_1.csv",
+				"fileSystem": "input"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "user",
+				"type": "String"
+			},
+			{
+				"name": "department",
+				"type": "String"
+			},
+			{
+				"name": "designation",
+				"type": "String"
+			}
+		]
 	}
 }

@@ -1,5 +1,5 @@
 {
-	"name": "DF_Output_Data",
+	"name": "DelimitedText19",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "azure_ddl_output",
@@ -16,14 +16,10 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@concat(dataset().file_name,'.csv')",
-					"type": "Expression"
-				},
-				"folderPath": {
 					"value": "@dataset().file_name",
 					"type": "Expression"
 				},
-				"fileSystem": "faild-activity"
+				"fileSystem": "filter-activity"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

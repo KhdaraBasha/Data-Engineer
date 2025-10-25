@@ -1,12 +1,12 @@
 {
-	"name": "DF_Output_Data",
+	"name": "DelimitedText20",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "azure_ddl_output",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"file_name": {
+			"folder_name": {
 				"type": "String"
 			}
 		},
@@ -15,15 +15,12 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@concat(dataset().file_name,'.csv')",
-					"type": "Expression"
-				},
+				"fileName": "employee.csv",
 				"folderPath": {
-					"value": "@dataset().file_name",
+					"value": "@dataset().folder_name",
 					"type": "Expression"
 				},
-				"fileSystem": "faild-activity"
+				"fileSystem": "switch-activity"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
