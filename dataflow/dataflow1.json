@@ -20,7 +20,8 @@
 				"}",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1"
+				"     ignoreNoFilesFound: false,",
+				"     wildcardPaths:[(toString($FileName1))]) ~> source1"
 			]
 		}
 	}
