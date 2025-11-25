@@ -48,7 +48,39 @@
 						"value": "@activity('Source Files').output.childItems",
 						"type": "Expression"
 					},
+					"isSequential": false,
 					"activities": [
+						{
+							"name": "Data flow1",
+							"type": "ExecuteDataFlow",
+							"dependsOn": [
+								{
+									"activity": "Set variable1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataflow": {
+									"referenceName": "dataflow1",
+									"type": "DataFlowReference"
+								},
+								"compute": {
+									"coreCount": 8,
+									"computeType": "General"
+								},
+								"traceLevel": "Fine"
+							}
+						},
 						{
 							"name": "Set variable1",
 							"type": "SetVariable",
@@ -70,6 +102,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"file_name": {
+				"type": "String"
+			}
+		},
 		"variables": {
 			"filename": {
 				"type": "String"
