@@ -67,7 +67,7 @@
 									"type": "DelimitedTextSource",
 									"additionalColumns": {
 										"type": "Expression",
-										"value": "@item().value"
+										"value": "@item().name"
 									},
 									"storeSettings": {
 										"type": "AzureBlobFSReadSettings",
