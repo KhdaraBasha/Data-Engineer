@@ -16,7 +16,7 @@
 			"transformations": [],
 			"scriptLines": [
 				"parameters{",
-				"     FileName as string ($FileName)",
+				"     FileName1 as string",
 				"}",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
