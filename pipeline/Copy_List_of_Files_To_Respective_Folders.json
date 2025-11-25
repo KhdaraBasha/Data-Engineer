@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "Copy_List_of_Files_To_Respective_Folders",
 	"properties": {
 		"activities": [
 			{
@@ -65,10 +65,6 @@
 							"typeProperties": {
 								"source": {
 									"type": "DelimitedTextSource",
-									"additionalColumns": {
-										"type": "Expression",
-										"value": "@item().name"
-									},
 									"storeSettings": {
 										"type": "AzureBlobFSReadSettings",
 										"recursive": true,
