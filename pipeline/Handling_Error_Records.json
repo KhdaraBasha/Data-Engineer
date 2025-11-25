@@ -1,5 +1,5 @@
 {
-	"name": "pipeline2",
+	"name": "Handling_Error_Records",
 	"properties": {
 		"activities": [
 			{
@@ -15,7 +15,20 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"fieldList": []
+					"dataset": {
+						"referenceName": "ErrorRecords",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
 				}
 			}
 		],
