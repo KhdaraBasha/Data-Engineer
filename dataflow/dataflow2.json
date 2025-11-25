@@ -1,0 +1,81 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ErrorRecords",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "GoodData",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "ConditionalSplit"
+				},
+				{
+					"name": "TransformingData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          salesDate as string,",
+				"          salesItem as string,",
+				"          country as string,",
+				"          quantity as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 split(isNull(toDate(salesDate, 'dd-MMM-yyyy')),",
+				"     disjoint: false) ~> ConditionalSplit@(ErrorRecords, GoodRecords)",
+				"ConditionalSplit@GoodRecords derive(salesDate = toDate(salesDate,'dd-MMM-yyyy'),",
+				"          quantity = toInteger(quantity)) ~> TransformingData",
+				"ConditionalSplit@ErrorRecords sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     mapColumn(",
+				"          salesDate,",
+				"          salesItem,",
+				"          country,",
+				"          quantity",
+				"     )) ~> sink1",
+				"TransformingData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          salesDate as date,",
+				"          salesItem as string,",
+				"          country as string,",
+				"          quantity as integer,",
+				"          FileName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          salesDate,",
+				"          salesItem,",
+				"          country,",
+				"          quantity",
+				"     )) ~> sink2"
+			]
+		}
+	}
+}
