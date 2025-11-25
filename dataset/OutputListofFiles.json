@@ -20,7 +20,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat('output/',split(dataset().filename,'.')[0])",
+					"value": "@concat('output/globalsalesdata/',split(dataset().filename,'.')[0])",
 					"type": "Expression"
 				},
 				"fileSystem": "data"
