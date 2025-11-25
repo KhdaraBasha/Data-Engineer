@@ -15,7 +15,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "output/",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('output/globalsalesdata/',dataset().filename)",
+					"type": "Expression"
+				},
 				"fileSystem": "data"
 			},
 			"columnDelimiter": ",",
