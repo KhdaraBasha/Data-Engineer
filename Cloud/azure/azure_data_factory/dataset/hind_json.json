@@ -1,0 +1,49 @@
+{
+	"name": "hind_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azure_ddl_storage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "hind_json_data.json",
+				"fileSystem": "hind-client-sample-data"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"@odata.context": {
+					"type": "string"
+				},
+				"@odata.nextLink": {
+					"type": "string"
+				},
+				"value": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"displayName": {
+								"type": "string"
+							},
+							"department": {
+								"type": "null"
+							},
+							"officeLocation": {
+								"type": "null"
+							},
+							"userPrincipalName": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
