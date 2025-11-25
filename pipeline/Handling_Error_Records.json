@@ -42,6 +42,7 @@
 						]
 					}
 				],
+				"userProperties": [],
 				"typeProperties": {
 					"items": {
 						"value": "@activity('Source Files').output.childItems",
@@ -49,15 +50,36 @@
 					},
 					"activities": [
 						{
-							"name": "If Condition1",
-							"type": "IfCondition",
+							"name": "Set variable1",
+							"type": "SetVariable",
 							"dependsOn": [],
-							"userProperties": []
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "",
+								"value": {
+									"value": "@item().name",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
 			}
 		],
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"filename": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
