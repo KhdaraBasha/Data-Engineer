@@ -51,21 +51,78 @@
 					"isSequential": false,
 					"activities": [
 						{
-							"name": "FileName",
-							"type": "SetVariable",
+							"name": "CopySalesData",
+							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
 								"secureOutput": false,
 								"secureInput": false
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "filename",
-								"value": {
-									"value": "@item().name",
-									"type": "Expression"
+								"source": {
+									"type": "DelimitedTextSource",
+									"additionalColumns": {
+										"type": "Expression",
+										"value": "@item().value"
+									},
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
 								}
-							}
+							},
+							"inputs": [
+								{
+									"referenceName": "ListofFiles",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "OutputListofFiles",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						}
 					]
 				}
