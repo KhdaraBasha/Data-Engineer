@@ -1,0 +1,25 @@
+{
+	"name": "Log_Pipeline_Execution",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Log_Pipeline_Execution_Details_to_SQL_Table",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2025-11-25T03:01:00",
+				"endTime": "2025-11-27T02:58:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
