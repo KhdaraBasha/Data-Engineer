@@ -79,7 +79,7 @@
 									}
 								},
 								"fieldList": [
-									"childItems"
+									"exists"
 								],
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
@@ -102,11 +102,7 @@
 									]
 								}
 							],
-							"userProperties": [
-								{
-									"name": "test"
-								}
-							],
+							"userProperties": [],
 							"typeProperties": {
 								"expression": {
 									"value": "@activity('Get Metadata1').output.exists",
