@@ -61,7 +61,7 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "test1",
+								"variableName": "sampledata",
 								"value": {
 									"value": "@item().domain_name",
 									"type": "Expression"
@@ -80,6 +80,9 @@
 				"type": "String"
 			},
 			"test1": {
+				"type": "String"
+			},
+			"sampledata": {
 				"type": "String"
 			}
 		},
