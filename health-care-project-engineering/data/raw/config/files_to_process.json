@@ -1,0 +1,35 @@
+
+-- ## Folder Stracture According to ADL
+
+[
+  {
+    "fileName": "appointments_*.csv",
+    "folder": "incoming/appointments/",
+    "targetTable": "stg_patients"
+  },
+  {
+    "fileName": "billing_*.csv",
+    "folder": "incoming/billing/",
+    "targetTable": "stg_appointments"
+  },
+  {
+    "fileName": "diagnosis_*.csv",
+    "folder": "incoming/diagnosis/",
+    "targetTable": "stg_diagnosis"
+  },
+  {
+    "fileName": "lab_results_*.csv",
+    "folder": "incoming/lab_results/",
+    "targetTable": "stg_lab_results"
+  },
+  {
+    "fileName": "patients_*.csv",
+    "folder": "incoming/patients/",
+    "targetTable": "stg_lab_results"
+  },
+  {
+    "fileName": "prescriptions_*.csv",
+    "folder": "incoming/prescriptions/",
+    "targetTable": "stg_lab_results"
+  }
+]
