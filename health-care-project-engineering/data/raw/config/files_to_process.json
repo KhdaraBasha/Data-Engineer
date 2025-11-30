@@ -3,32 +3,38 @@
 
 [
   {
+	"domain_name": "appointment",
     "fileName": "appointments_*.csv",
     "folder": "incoming/appointments/",
     "targetTable": "stg_patients"
   },
   {
+	 "domain_name":	"billing",
     "fileName": "billing_*.csv",
     "folder": "incoming/billing/",
     "targetTable": "stg_appointments"
   },
   {
-    "fileName": "diagnosis_*.csv",
+    "domain_name": "diagnosis",
+	"fileName": "diagnosis_*.csv",
     "folder": "incoming/diagnosis/",
     "targetTable": "stg_diagnosis"
   },
   {
-    "fileName": "lab_results_*.csv",
+    "domain_name": "lab_results",
+	"fileName": "lab_results_*.csv",
     "folder": "incoming/lab_results/",
     "targetTable": "stg_lab_results"
   },
   {
-    "fileName": "patients_*.csv",
+    "domain_name": "patients",
+	"fileName": "patients_*.csv",
     "folder": "incoming/patients/",
     "targetTable": "stg_lab_results"
   },
   {
-    "fileName": "prescriptions_*.csv",
+    "domain_name": "prescription",
+	"fileName": "prescriptions_*.csv",
     "folder": "incoming/prescriptions/",
     "targetTable": "stg_lab_results"
   }
