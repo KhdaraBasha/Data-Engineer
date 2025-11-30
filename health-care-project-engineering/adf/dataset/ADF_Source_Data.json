@@ -1,5 +1,5 @@
 {
-	"name": "ADl_Source_Data",
+	"name": "ADF_Source_Data",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ADL_Storage",
