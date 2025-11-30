@@ -1,9 +1,0 @@
-{
-	"name": "pocadf2025",
-	"location": "centralindia",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "c2ce8d04-e5bc-4ac3-8e50-715cacd969b5",
-		"tenantId": "5db50c94-412d-473c-98ea-f6a81b21f994"
-	}
-}

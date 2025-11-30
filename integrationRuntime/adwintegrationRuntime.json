@@ -1,6 +1,0 @@
-{
-	"name": "adwintegrationRuntime",
-	"properties": {
-		"type": "SelfHosted"
-	}
-}
