@@ -69,11 +69,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"file_path": {
-											"value": "@item().file_path",
+											"value": "@item().folder",
 											"type": "Expression"
 										},
 										"file_name": {
-											"value": "@item().file_name",
+											"value": "@item().fileName",
 											"type": "Expression"
 										}
 									}
