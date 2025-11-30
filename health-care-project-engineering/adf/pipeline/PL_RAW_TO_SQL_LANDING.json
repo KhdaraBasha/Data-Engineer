@@ -62,7 +62,6 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "MetadataFiles",
@@ -121,12 +120,12 @@
 								],
 								"ifTrueActivities": [
 									{
-										"name": "Wait1",
+										"name": "Wait3",
 										"type": "Wait",
 										"dependsOn": [],
 										"userProperties": [],
 										"typeProperties": {
-											"waitTimeInSeconds": 5
+											"waitTimeInSeconds": 1
 										}
 									}
 								]
