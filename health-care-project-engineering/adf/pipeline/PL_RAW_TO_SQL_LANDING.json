@@ -73,15 +73,6 @@
 			}
 		],
 		"variables": {
-			"Test": {
-				"type": "String"
-			},
-			"test": {
-				"type": "String"
-			},
-			"test1": {
-				"type": "String"
-			},
 			"sampledata": {
 				"type": "String"
 			}
