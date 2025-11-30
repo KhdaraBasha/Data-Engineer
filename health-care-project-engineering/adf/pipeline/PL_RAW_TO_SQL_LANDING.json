@@ -52,12 +52,20 @@
 					},
 					"activities": [
 						{
-							"name": "Wait1",
-							"type": "Wait",
+							"name": "Set variable1",
+							"type": "SetVariable",
 							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
 							"userProperties": [],
 							"typeProperties": {
-								"waitTimeInSeconds": 1
+								"variableName": "test",
+								"value": {
+									"value": "@item().domain_name",
+									"type": "Expression"
+								}
 							}
 						}
 					]
@@ -66,6 +74,9 @@
 		],
 		"variables": {
 			"Test": {
+				"type": "String"
+			},
+			"test": {
 				"type": "String"
 			}
 		},
