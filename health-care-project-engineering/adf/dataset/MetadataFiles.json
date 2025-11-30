@@ -23,7 +23,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat('raw/',dataset().file_path)",
+					"value": "dataset().file_path",
 					"type": "Expression"
 				},
 				"fileSystem": "healthcare"
