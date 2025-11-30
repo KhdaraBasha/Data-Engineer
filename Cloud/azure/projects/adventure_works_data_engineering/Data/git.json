@@ -1,0 +1,52 @@
+[
+	{
+		"p_rel_url": "KhdaraBasha/Data-Engineer/refs/heads/de_learn/Cloud/azure/projects/adventure_works_data_engineering/Data/AdventureWorks_Calendar.csv",
+		"p_sink_directory": "Calendar",
+		"p_sink_file_name": "calendar.csv"
+	},
+	{
+		"p_rel_url": "KhdaraBasha/Data-Engineer/refs/heads/de_learn/Cloud/azure/projects/adventure_works_data_engineering/Data/AdventureWorks_Customers.csv",
+		"p_sink_directory": "Customers",
+		"p_sink_file_name": "customers.csv"
+	},
+	{
+		"p_rel_url": "KhdaraBasha/Data-Engineer/refs/heads/de_learn/Cloud/azure/projects/adventure_works_data_engineering/Data/AdventureWorks_Product_Categories.csv",
+		"p_sink_directory": "Product_Categories",
+		"p_sink_file_name": "product_categories.csv"
+	},
+	{
+		"p_rel_url": "KhdaraBasha/Data-Engineer/refs/heads/de_learn/Cloud/azure/projects/adventure_works_data_engineering/Data/AdventureWorks_Product_Subcategories.csv",
+		"p_sink_directory": "Product_Subcategories",
+		"p_sink_file_name": "product_subcategories.csv"
+	},
+	{
+		"p_rel_url": "KhdaraBasha/Data-Engineer/refs/heads/de_learn/Cloud/azure/projects/adventure_works_data_engineering/Data/AdventureWorks_Products.csv",
+		"p_sink_directory": "Products",
+		"p_sink_file_name": "products.csv"
+	},
+	{
+		"p_rel_url": "KhdaraBasha/Data-Engineer/refs/heads/de_learn/Cloud/azure/projects/adventure_works_data_engineering/Data/AdventureWorks_Returns.csv",
+		"p_sink_directory": "Returns",
+		"p_sink_file_name": "returns.csv"
+	},
+	{
+		"p_rel_url": "KhdaraBasha/Data-Engineer/refs/heads/de_learn/Cloud/azure/projects/adventure_works_data_engineering/Data/AdventureWorks_Sales_2015.csv",
+		"p_sink_directory": "Sales_2015",
+		"p_sink_file_name": "sales_2015.csv"
+	},
+	{
+		"p_rel_url": "KhdaraBasha/Data-Engineer/refs/heads/de_learn/Cloud/azure/projects/adventure_works_data_engineering/Data/AdventureWorks_Sales_2016.csv",
+		"p_sink_directory": "Sales_2016",
+		"p_sink_file_name": "sales_2016.csv"
+	},
+	{
+		"p_rel_url": "KhdaraBasha/Data-Engineer/refs/heads/de_learn/Cloud/azure/projects/adventure_works_data_engineering/Data/AdventureWorks_Sales_2017.csv",
+		"p_sink_directory": "Sales_2017",
+		"p_sink_file_name": "sales_2017.csv"
+	},
+	{
+		"p_rel_url": "KhdaraBasha/Data-Engineer/refs/heads/de_learn/Cloud/azure/projects/adventure_works_data_engineering/Data/AdventureWorks_Territories.csv",
+		"p_sink_directory": "Territories",
+		"p_sink_file_name": "territories.csv"
+	}
+]

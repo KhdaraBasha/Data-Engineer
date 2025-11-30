@@ -1,0 +1,67 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "azure_ddl_data",
+						"type": "DatasetReference"
+					},
+					"name": "PivotData"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText9",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "pivot1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp_id as short,",
+				"          dept_name as string,",
+				"          dept_id as short,",
+				"          name as string,",
+				"          country as string,",
+				"          {_c5} as string,",
+				"          {_c6} as string,",
+				"          {_c7} as string,",
+				"          {_c8} as string,",
+				"          {_c9} as string,",
+				"          {_c10} as string,",
+				"          {_c11} as string,",
+				"          {_c12} as string,",
+				"          {_c13} as string,",
+				"          {_c14} as string,",
+				"          {_c15} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> PivotData",
+				"PivotData pivot(groupBy(dept_id,",
+				"          dept_name),",
+				"     pivotBy(country),",
+				"     {} = count(emp_id),",
+				"     columnNaming: '$N$V',",
+				"     lateral: true) ~> pivot1",
+				"pivot1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

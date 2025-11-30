@@ -1,0 +1,187 @@
+{
+	"name": "Bronze_to_Silver",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "pocazurespark",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "5a82b37c-c278-4e3c-a74a-8787e364d477"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/6bbdd632-f1d6-4c0c-8b40-49cb5f250742/resourceGroups/poc_azure_projects/providers/Microsoft.Synapse/workspaces/poc-azure-synapse-projects/bigDataPools/pocazurespark",
+				"name": "pocazurespark",
+				"type": "Spark",
+				"endpoint": "https://poc-azure-synapse-projects.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/pocazurespark",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.5",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"%md\n",
+					"### <mark><u>**Silver Layer Pipeline**</u></mark>"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"%md\n",
+					"#### Import Required Modules"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"from pyspark.sql.functions import *\n",
+					"from pyspark.sql.types import *\n",
+					"from pyspark.sql.group import *\n",
+					"from notebookutils import mssparkutils\n",
+					""
+				],
+				"execution_count": 39
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"%md\n",
+					"#### Check Source File Exist or Not"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"mssparkutils.fs.ls(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/bronze/retail_transactions.parquet\")"
+				],
+				"execution_count": 41
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"%md\n",
+					"#### Read Data from Azure DataLake Storage"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"collapsed": false
+				},
+				"source": [
+					"df_bronze = spark.read.parquet(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/bronze/\")\n",
+					"\n",
+					"df_silver = \\\n",
+					"(\\\n",
+					"    df_bronze\\\n",
+					"    .filter(col(\"event_type\") == \"purchase\")\\\n",
+					"    .dropna(subset=[\"customer_id\", \"amount\"])\\\n",
+					"    .withColumn(\"event_date\", to_date(col(\"event_timestamp\")))\\\n",
+					"    .withColumn(\"payment_method\", lower(col(\"payment_method\")))\\\n",
+					"    .withColumn(\"amount\", col(\"amount\").cast(\"float\"))\\\n",
+					"    # .select(\\\n",
+					"    #     \"event_id\", \"customer_id\", \"event_date\", \"product_id\",\\\n",
+					"    #     \"product_category\", \"payment_methid\", \"amount\", \"location\", \"status\"\\\n",
+					"    # )\\\n",
+					")"
+				],
+				"execution_count": 53
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"%md\n",
+					"#### Write DataFrame Silver to Silver Storage Layer"
+				]
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df_silver.write.format(\"parquet\")\\\n",
+					"        .mode(\"overwrite\")\\\n",
+					"        .save(\"abfss://retail@pocazuresynapsestorage.dfs.core.windows.net/silver/\")"
+				],
+				"execution_count": 56
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					""
+				]
+			}
+		]
+	}
+}

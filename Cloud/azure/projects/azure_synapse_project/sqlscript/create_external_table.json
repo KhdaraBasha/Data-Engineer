@@ -1,0 +1,17 @@
+{
+	"name": "create_external_table",
+	"properties": {
+		"content": {
+			"query": "\n-- ## Connect to The DataBase\nUSE poc_retail_db;\n\n-- ## Create External Table - Daily Revenue\nCREATE EXTERNAL TABLE tb_ext_daily_revenue (\n    event_date Date,\n    daily_revenue FLOAT,\n    total_purchases INT\n)\nWITH    (\n    LOCATION = 'gold/daily_revenue/',\n    DATA_SOURCE = adl_retail_datasource,\n    FILE_FORMAT = ParquetFormat\n)\n;\n\nselect * from dbo.tb_ext_daily_revenue;\n\n-- ## Create External Table - Week Day Revenue\nCREATE EXTERNAL TABLE poc.tb_ext_week_day_revenue \n    (\n        event_daya VARCHAR,\n        tot_revenue FLOAT,\n        tot_transactions INT\n    )\nWITH    \n    (\n        LOCATION = 'gold/week_day_revenue/',\n        DATA_SOURCE = adl_retail_datasource,\n        FILE_FORMAT = ParquetFormat\n    )\n;\n\nselect * from poc.tb_ext_week_day_revenue;\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "poc_retail_db",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

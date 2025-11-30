@@ -1,0 +1,86 @@
+{
+	"name": "DF_Join_Emp_Dept_Data",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "df_emp_data",
+						"type": "DatasetReference"
+					},
+					"name": "EmpDatra"
+				},
+				{
+					"dataset": {
+						"referenceName": "df_depat_data",
+						"type": "DatasetReference"
+					},
+					"name": "DeptData"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DF_EMPDept_Data",
+						"type": "DatasetReference"
+					},
+					"name": "EmpDeptOutput"
+				}
+			],
+			"transformations": [
+				{
+					"name": "EmpDeptJoin"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp_id as string,",
+				"          name as string,",
+				"          salary as string,",
+				"          address as string,",
+				"          loc as string,",
+				"          email as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> EmpDatra",
+				"source(output(",
+				"          user as string,",
+				"          department as string,",
+				"          designation as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> DeptData",
+				"EmpDatra, DeptData join(emp_id == user,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> EmpDeptJoin",
+				"EmpDeptJoin select(mapColumn(",
+				"          emp_id,",
+				"          name,",
+				"          salary,",
+				"          address,",
+				"          loc,",
+				"          email,",
+				"          department,",
+				"          designation",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> EmpDeptOutput"
+			]
+		}
+	}
+}

@@ -1,0 +1,8 @@
+
+pandas
+numpy
+zipfile36
+requests
+beautifulsoup4
+# lxml
+# tqdm

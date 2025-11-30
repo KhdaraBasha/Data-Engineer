@@ -1,0 +1,19 @@
+{
+	"name": "Json9",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azure_ddl_output",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "output",
+				"fileSystem": "empty-file-scenario"
+			}
+		},
+		"schema": {}
+	}
+}

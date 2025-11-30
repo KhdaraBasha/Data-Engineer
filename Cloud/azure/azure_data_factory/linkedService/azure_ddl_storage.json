@@ -1,0 +1,12 @@
+{
+	"name": "azure_ddl_storage",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://pocdata2025.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDNEMUIwMTE3LUE4N0QtNDIzMS04QjAzLUZCOEU3MUVBRTFGQ181ZmUzYTk1Yy0yN2NkLTQyZWQtYjU5MC1hMTY4ODllYjA0ODMiDQp9"
+		}
+	}
+}

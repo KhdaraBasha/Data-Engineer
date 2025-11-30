@@ -1,0 +1,35 @@
+{
+	"name": "DF_Output_Data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azure_ddl_output",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"file_name": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(dataset().file_name,'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().file_name",
+					"type": "Expression"
+				},
+				"fileSystem": "faild-activity"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

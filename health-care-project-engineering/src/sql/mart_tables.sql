@@ -1,0 +1,1 @@
+-- Mart schema: dims and facts (star schema)

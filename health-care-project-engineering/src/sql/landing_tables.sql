@@ -1,0 +1,1 @@
+-- Landing schema: create tables matching CSV columns

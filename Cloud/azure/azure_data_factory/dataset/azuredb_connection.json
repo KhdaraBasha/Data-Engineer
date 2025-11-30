@@ -1,0 +1,121 @@
+{
+	"name": "azuredb_connection",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azure_sql_connection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Order_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Order_Date",
+				"type": "date"
+			},
+			{
+				"name": "Ship_Date",
+				"type": "date"
+			},
+			{
+				"name": "Ship_Mode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Segment",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "City",
+				"type": "nvarchar"
+			},
+			{
+				"name": "State",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Postal_Code",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Region",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Category",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Sub_Category",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Sales",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Discount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Profit",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "user_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "state_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "order_s",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "superstore_sales"
+		}
+	}
+}

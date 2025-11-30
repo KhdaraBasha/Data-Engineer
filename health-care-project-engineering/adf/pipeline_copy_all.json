@@ -1,0 +1,71 @@
+{
+  "name": "CopyAllCSVToLanding",
+  "properties": {
+    "activities": [
+      {
+        "name": "CopyPatients",
+        "type": "Copy",
+        "inputs": [
+          {
+            "referenceName": "BlobPatients",
+            "type": "DatasetReference"
+          }
+        ],
+        "outputs": [
+          {
+            "referenceName": "SqlLandingPatients",
+            "type": "DatasetReference"
+          }
+        ]
+      },
+      {
+        "name": "CopyLab",
+        "type": "Copy",
+        "inputs": [
+          {
+            "referenceName": "BlobLab",
+            "type": "DatasetReference"
+          }
+        ],
+        "outputs": [
+          {
+            "referenceName": "SqlLandingLab",
+            "type": "DatasetReference"
+          }
+        ]
+      },
+      {
+        "name": "CopyPrescriptions",
+        "type": "Copy",
+        "inputs": [
+          {
+            "referenceName": "BlobPresc",
+            "type": "DatasetReference"
+          }
+        ],
+        "outputs": [
+          {
+            "referenceName": "SqlLandingPresc",
+            "type": "DatasetReference"
+          }
+        ]
+      },
+      {
+        "name": "CopyBilling",
+        "type": "Copy",
+        "inputs": [
+          {
+            "referenceName": "BlobBilling",
+            "type": "DatasetReference"
+          }
+        ],
+        "outputs": [
+          {
+            "referenceName": "SqlLandingBilling",
+            "type": "DatasetReference"
+          }
+        ]
+      }
+    ]
+  }
+}

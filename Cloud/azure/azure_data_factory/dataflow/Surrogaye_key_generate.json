@@ -1,0 +1,37 @@
+{
+	"name": "Surrogaye_key_generate",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText22",
+						"type": "DatasetReference"
+					},
+					"name": "DeptData"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "GenerateSurrogateKey"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as integer,",
+				"          dept as string,",
+				"          india as integer,",
+				"          usa as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> DeptData",
+				"DeptData keyGenerate(output(pk_id as long),",
+				"     startAt: 100L,",
+				"     stepValue: 1L) ~> GenerateSurrogateKey"
+			]
+		}
+	}
+}
