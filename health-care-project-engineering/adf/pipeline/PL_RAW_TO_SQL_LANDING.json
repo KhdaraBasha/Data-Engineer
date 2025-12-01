@@ -52,7 +52,7 @@
 					},
 					"activities": [
 						{
-							"name": "Get Metadata1",
+							"name": "Get Metadata",
 							"type": "GetMetadata",
 							"dependsOn": [],
 							"policy": {
@@ -98,7 +98,7 @@
 							"type": "IfCondition",
 							"dependsOn": [
 								{
-									"activity": "Get Metadata1",
+									"activity": "Get Metadata",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -107,7 +107,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@greaterOrEquals(3, length(activity('Get Metadata1').output.childItems))",
+									"value": "@greaterOrEquals(3, length(activity('Get Metadata').output.childItems))",
 									"type": "Expression"
 								},
 								"ifFalseActivities": [
@@ -123,12 +123,20 @@
 								],
 								"ifTrueActivities": [
 									{
-										"name": "Wait3",
-										"type": "Wait",
+										"name": "Set variable1",
+										"type": "SetVariable",
 										"dependsOn": [],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
 										"userProperties": [],
 										"typeProperties": {
-											"waitTimeInSeconds": 5
+											"variableName": "sampledata",
+											"value": {
+												"value": "@activity('Get Metadata').output.childItems",
+												"type": "Expression"
+											}
 										}
 									}
 								]
