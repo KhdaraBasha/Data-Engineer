@@ -94,8 +94,8 @@
 							}
 						},
 						{
-							"name": "If Condition1",
-							"type": "IfCondition",
+							"name": "Set variable1",
+							"type": "SetVariable",
 							"dependsOn": [
 								{
 									"activity": "Get Metadata",
@@ -104,42 +104,17 @@
 									]
 								}
 							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
 							"userProperties": [],
 							"typeProperties": {
-								"expression": {
-									"value": "@greaterOrEquals(3, length(activity('Get Metadata').output.childItems))",
+								"variableName": "sampledata",
+								"value": {
+									"value": "@activity('Get Metadata').output.childItems",
 									"type": "Expression"
-								},
-								"ifFalseActivities": [
-									{
-										"name": "Wait2",
-										"type": "Wait",
-										"dependsOn": [],
-										"userProperties": [],
-										"typeProperties": {
-											"waitTimeInSeconds": 3
-										}
-									}
-								],
-								"ifTrueActivities": [
-									{
-										"name": "Set variable1",
-										"type": "SetVariable",
-										"dependsOn": [],
-										"policy": {
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"variableName": "sampledata",
-											"value": {
-												"value": "@activity('Get Metadata').output.childItems",
-												"type": "Expression"
-											}
-										}
-									}
-								]
+								}
 							}
 						}
 					]
