@@ -1,0 +1,20 @@
+{
+	"name": "Raw_Config_File",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADL_Storage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "files_to_process.json",
+				"folderPath": "raw/config",
+				"fileSystem": "healthcare"
+			}
+		},
+		"schema": {}
+	}
+}

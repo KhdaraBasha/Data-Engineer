@@ -1,0 +1,14 @@
+Number of people in space: 12
+
+Name: Oleg Kononenko
+Name: Nikolai Chub
+Name: Tracy Caldwell Dyson
+Name: Matthew Dominick
+Name: Michael Barratt
+Name: Jeanette Epps
+Name: Alexander Grebenkin
+Name: Butch Wilmore
+Name: Sunita Williams
+Name: Li Guangsu
+Name: Li Cong
+Name: Ye Guangfu
