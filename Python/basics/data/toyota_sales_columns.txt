@@ -1,0 +1,7 @@
+sale_id
+sale_rep_id
+sale_date
+car_model
+sale_amount
+commission_pct
+sale_status
