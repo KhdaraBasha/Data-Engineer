@@ -1,0 +1,23 @@
+
+gitignore
+
+# Environment Files
+.env 
+*.env 
+
+# Windows Batch Files
+*.bat
+
+# Secrets / configs
+config_loacl.py
+Secrets.json
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# CSV Files
+*.csv
+*.xlsx
+*.log
+data/
